@@ -1,0 +1,27 @@
+---
+title: "APA tables"
+author: "Marian Pitel"
+date: "November 8, 2016"
+output: pdf_document
+---
+
+# My first heading
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(apaTables)
+my.data <- read_csv("regLectureData.csv")
+my.reg <- lm(VidScore ~ age + iq, data=my.data)
+
+apa.reg.table(my.reg) # shows an ugly table in markdown 
+# no pretty way to do it FOR NOW 
+x <- apa.reg.table(my.reg, filename= "table_1.doc", table.number = 1)
+
+my.graph <- qplot(iq,age, data=my.data) # scatterplot
+print(my.graph)
+
+iq_mean <- mean(my.data$iq) 
+# using ` r ` (under tilda) means this is now an r code 
+```
+
+The mean IQ in my sample was *M* = `r iq_mean`
+
